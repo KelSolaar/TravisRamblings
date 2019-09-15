@@ -8,6 +8,9 @@ matrix:
     env:
     - PYTHON_VERSION="3.7"
 
+notifications:
+  slack: colour-science:Y6lPPcN7y53Js94geqUpqsAP
+
 before_install:
   - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - chmod +x miniconda.sh
@@ -23,3 +26,6 @@ install:
 script:
   - flake8 colour_demosaicing
   - nosetests --nocapture --with-doctest --doctest-options=+ELLIPSIS,+NORMALIZE_WHITESPACE --with-coverage --cover-package=colour_demosaicing colour_demosaicing
+
+after_success:
+  - coveralls
