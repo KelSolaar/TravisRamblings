@@ -20,7 +20,7 @@ addons:
       - tree
 
 before_install:
-  - sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo add-apt-repository --yes ppa:deadsnakes/ppa
   - sudo apt install python3.7
   - wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.17.tar.gz -O /tmp/OpenImageIO-1.8.17.tar.gz
   - tar -xvf /tmp/OpenImageIO-1.8.17.tar.gz
