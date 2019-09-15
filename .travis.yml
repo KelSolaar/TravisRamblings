@@ -12,19 +12,21 @@ addons:
   apt:
    sources:
       - ubuntu-toolchain-r-test
-      - ppa:deadsnakes/ppa
    packages:
       - libboost-all-dev
       - libopenexr-dev
       - libilmbase-dev
-      - python3.7
       - software-properties-common
+      - tree
 
 before_install:
+  - sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo apt install python3.7
   - wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.17.tar.gz -O /tmp/OpenImageIO-1.8.17.tar.gz
   - tar -xvf /tmp/OpenImageIO-1.8.17.tar.gz
   - cd oiio-Release-1.8.17
   - make
+  - tree /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64
   - cd /home/travis/build/colour-science/colour-demosaicing
   - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - chmod +x miniconda.sh
