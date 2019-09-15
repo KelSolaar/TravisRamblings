@@ -17,6 +17,7 @@ addons:
     - libboost-all-dev
     - libilmbase-dev
     - libopenexr-dev
+    - tree
 
 install:
   - wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.17.tar.gz -O /tmp/OpenImageIO-1.8.17.tar.gz
@@ -24,6 +25,9 @@ install:
   - tar -xvf /tmp/OpenImageIO-1.8.17.tar.gz
   - cd /tmp/oiio-Release-1.8.17
   - make
+
+script:
+  - tree /tmp/oiio-Release-1.8.17/dist
 
 deploy:
   provider: gcs
