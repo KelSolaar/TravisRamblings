@@ -5,14 +5,12 @@ language: python
 matrix:
   fast_finish: true
   include:
-  - python: 3.6
+  - python: 3.7
     env:
-    - PYTHON_VERSION="3.6"
+    - PYTHON_VERSION="3.7"
 
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
       - build-essential
       - cmake
@@ -48,7 +46,7 @@ install:
   - conda install -y -c conda-forge colour-science
   - sudo cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/bin/* /usr/local/bin/
   - sudo cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/lib/* /usr/local/lib/
-  - cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/python3.6/OpenImageIO.so /home/travis/miniconda/envs/colour-demosaicing-ci/lib/python3.6/site-packages/
+  - cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/python3.7/OpenImageIO.so /home/travis/miniconda/envs/colour-demosaicing-ci/lib/python3.7/site-packages/
 
 script:
   - flake8 colour_demosaicing
