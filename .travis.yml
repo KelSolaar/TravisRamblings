@@ -19,9 +19,8 @@ before_install:
   - conda update --yes --quiet conda
 
 install:
-  - conda create --yes --quiet -n colour-demosaicing-ci python=${PYTHON_VERSION} coverage coveralls flake8 matplotlib mock nose
+  - conda create --yes --quiet -n colour-demosaicing-ci -c conda-forge python=${PYTHON_VERSION} coverage coveralls flake8 matplotlib mock nose colour-science openimageio
   - source activate colour-demosaicing-ci
-  - conda install -y -c conda-forge colour-science openimageio
 
 script:
   - flake8 colour_demosaicing
