@@ -4,9 +4,9 @@ language: python
 matrix:
   fast_finish: true
   include:
-  - python: 3.7
+  - python: 3.6
     env:
-    - PYTHON_VERSION="3.7"
+    - PYTHON_VERSION="3.6"
 
 addons:
   apt:
@@ -16,16 +16,9 @@ addons:
       - libboost-all-dev
       - libopenexr-dev
       - libilmbase-dev
-      - software-properties-common
       - tree
 
 before_install:
-  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/ppa
-  - sudo apt-get update
-  - sudo apt install python3.7
-  - sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
-  - sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
-  - sudo update-alternatives --config python3
   - wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.17.tar.gz -O /tmp/OpenImageIO-1.8.17.tar.gz
   - tar -xvf /tmp/OpenImageIO-1.8.17.tar.gz
   - cd oiio-Release-1.8.17
@@ -44,7 +37,7 @@ install:
   - conda install -y -c conda-forge colour-science
   - sudo cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/bin/* /usr/local/bin/
   - sudo cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/lib/* /usr/local/lib/
-  - cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/python/OpenImageIO.so /home/travis/miniconda/envs/colour-demosaicing-ci/lib/python3.7/site-packages/
+  - cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/python/OpenImageIO.so /home/travis/miniconda/envs/colour-demosaicing-ci/lib/python3.6/site-packages/
 
 script:
   - flake8 colour_demosaicing
