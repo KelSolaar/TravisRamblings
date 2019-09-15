@@ -1,0 +1,48 @@
+sudo: true
+language: python
+
+matrix:
+  fast_finish: true
+  include:
+  - python: 3.7
+    env:
+    - PYTHON_VERSION="3.7"
+
+addons:
+  apt:
+   sources:
+      - ubuntu-toolchain-r-test
+      - ppa:deadsnakes/ppa
+   packages:
+      - libboost-all-dev
+      - libopenexr-dev
+      - libilmbase-dev
+      - python3.7
+      - software-properties-common
+
+before_install:
+  - wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.17.tar.gz -O /tmp/OpenImageIO-1.8.17.tar.gz
+  - tar -xvf /tmp/OpenImageIO-1.8.17.tar.gz
+  - cd oiio-Release-1.8.17
+  - make
+  - cd /home/travis/build/colour-science/colour-demosaicing
+  - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b -p /home/travis/miniconda
+  - export PATH=/home/travis/miniconda/bin:$PATH
+  - conda update --yes --quiet conda
+
+install:
+  - conda create --yes --quiet -n colour-demosaicing-ci python=${PYTHON_VERSION} coverage coveralls flake8 matplotlib mock nose
+  - source activate colour-demosaicing-ci
+  - conda install -y -c conda-forge colour-science
+  - sudo cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/bin/* /usr/local/bin/
+  - sudo cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/lib/* /usr/local/lib/
+  - cp /home/travis/build/colour-science/colour-demosaicing/oiio-Release-1.8.17/dist/linux64/python/OpenImageIO.so /home/travis/miniconda/envs/colour-demosaicing-ci/lib/python3.7/site-packages/
+
+script:
+  - flake8 colour_demosaicing
+  - nosetests --nocapture --with-doctest --doctest-options=+ELLIPSIS,+NORMALIZE_WHITESPACE --with-coverage --cover-package=colour_demosaicing colour_demosaicing
+
+after_success:
+  - coveralls
