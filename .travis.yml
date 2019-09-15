@@ -16,7 +16,7 @@ before_install:
   - conda update --yes --quiet conda
 
 install:
-  - conda create --yes --quiet -n oiio-ci -c conda-forge python=${PYTHON_VERSION} openimageio
+  - conda create --yes --quiet -n oiio-ci -c quantstack python=${PYTHON_VERSION} openimageio
   - source activate oiio-ci
 
 script:
