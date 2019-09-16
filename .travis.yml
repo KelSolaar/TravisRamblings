@@ -20,14 +20,18 @@ addons:
     - tree
 
 install:
-  - wget https://github.com/OpenImageIO/oiio/archive/Release-1.8.17.tar.gz -O /tmp/OpenImageIO-1.8.17.tar.gz
+  - OIIO_FAMILY=OpenImageIO
+  - OIIO_VERSION=Release-1.8.17
+  - OIIO_PACKAGE=${OIIO_FAMILY}-${OIIO_VERSION}
+  - wget https://github.com/OpenImageIO/oiio/archive/${OIIO_VERSION}.tar.gz -O /tmp/${OIIO_PACKAGE}.tar.gz
   - cd /tmp
-  - tar -xvf /tmp/OpenImageIO-1.8.17.tar.gz
-  - cd /tmp/oiio-Release-1.8.17
-  - make
+  - tar -xvf /tmp/${OIIO_PACKAGE}.tar.gz -C ${OIIO_PACKAGE}
+  - cd /tmp/${OIIO_PACKAGE}
 
 script:
-  - tree /tmp/oiio-Release-1.8.17/dist
+  - make
+  - mkdir -p /tmp/${OIIO_PACKAGE}/release/${OIIO_PACKAGE}
+  - cp -r /tmp/${OIIO_PACKAGE}/dist /tmp/${OIIO_PACKAGE}/release/${OIIO_PACKAGE}
 
 deploy:
   provider: gcs
@@ -35,5 +39,5 @@ deploy:
   secret_access_key:
     secure: Qu01q8+YW44WlCfB3UoMxnfkoskOzW0pHwNJ0KV40yfhjL5mVDJQWHMkDZB/VZ0bSdygRHztWHw+EeUjjdVXKOhYDYhhhuGu5LqN/pxc+unXTxgroVRL2fw53EKxS/sd/mSehs0RqXbkvTvDjcW2SGkM7DFPOAfQlnpUd2bVSFAr1laVzErz4mGNu7J5fHj+d8fkP3UGnXem96hODizDeSpyIPU2JIcDH5GXPObk5ogU/CGd5wQFe94mMcNV9GIEIqvYfsyes9GkCSJXCMmp3LNzdeh3adScA2WzuRoCWbj84ORgB8OXNAtcL4dbY308l83qAtALS+wcpE69RuafkJF6k7zvFlAzSwhFVxLL2b9WdcF5G+k6ukVF9XdSNa8BzTrICDktpw/G3Ll0uT71e958g2f6kVnmwQASya7/9e1qPrEaOvEzd+Yi5jmdY/JbYgAkkHfVXwqTMWioPdKz0ocFF24tNv3VgpXEE9uZKSFuV+ZetJ/Ud1m2avCuVEEUshsTP32J8bGI71M599H466XeclGE+Le4IMHacNHGPSCphINdm8a2CmBD8K8yLtOlrVzMYjHrDloaBUKtwd+/XtZ1gmHvB11h5PRc9uZWi9d9Qwl7ivE0S4jgnsZJWNQurKTjVn5Vls4O4qYO86OkI6rqEFobRbivRfZBpvIuJIw=
   bucket: colour-science-artifacts
-  local-dir: "/tmp/oiio-Release-1.8.17/dist"
+  local-dir: "/tmp/${OIIO_PACKAGE}/release/"
   skip_cleanup: true
