@@ -15,9 +15,9 @@ matrix:
 addons:
   apt:
     packages:
-      - libboost-all
-      - libopenexr
-      - libilmbase
+      - libboost-all-dev
+      - libopenexr-dev
+      - libilmbase-dev
       - tree
 
 before_install:
