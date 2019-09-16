@@ -25,7 +25,7 @@ install:
   - OIIO_PACKAGE=${OIIO_FAMILY}-${OIIO_VERSION}
   - wget https://github.com/OpenImageIO/oiio/archive/${OIIO_VERSION}.tar.gz -O /tmp/${OIIO_PACKAGE}.tar.gz
   - mkdir /tmp/${OIIO_PACKAGE}
-  - tar -xvf /tmp/${OIIO_PACKAGE}.tar.gz -C /tmp/${OIIO_PACKAGE}
+  - tar -xvf /tmp/${OIIO_PACKAGE}.tar.gz -C /tmp/${OIIO_PACKAGE} --strip-components=1
   - cd /tmp/${OIIO_PACKAGE}
 
 script:
