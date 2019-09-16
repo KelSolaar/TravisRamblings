@@ -24,8 +24,8 @@ install:
   - OIIO_VERSION=Release-1.8.17
   - OIIO_PACKAGE=${OIIO_FAMILY}-${OIIO_VERSION}
   - wget https://github.com/OpenImageIO/oiio/archive/${OIIO_VERSION}.tar.gz -O /tmp/${OIIO_PACKAGE}.tar.gz
-  - cd /tmp
-  - tar -xvf /tmp/${OIIO_PACKAGE}.tar.gz -C ${OIIO_PACKAGE}
+  - mkdir /tmp/${OIIO_PACKAGE}
+  - tar -xvf /tmp/${OIIO_PACKAGE}.tar.gz -C /tmp/${OIIO_PACKAGE}
   - cd /tmp/${OIIO_PACKAGE}
 
 script:
