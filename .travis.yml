@@ -22,7 +22,7 @@ addons:
 
 before_install:
   - wget https://github.com/colour-science/artifacts/releases/download/untagged-61475b25955feda41876/OpenImageIO-Release-1.8.17.tar.gz -O /tmp/OpenImageIO-Release-1.8.17.tar.gz
-  - tar -xvf /tmp/OpenImageIO-Release-1.8.17.tar.gz
+  - tar -xvf /tmp/OpenImageIO-Release-1.8.17.tar.gz -C OpenImageIO-Release-1.8.17 --strip-components=1
   - tree /tmp
   - if [ ${TRAVIS_PYTHON_VERSION:O:1} == "2" ]; then wget http://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh; else wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; fi
   - chmod +x miniconda.sh
